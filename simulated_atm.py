@@ -15,7 +15,7 @@ while loop_1 is True:
                     choice = int(input('Would you like to do anything else? \n Enter 1 for Yes'
                     '\n Enter 2 for No \n\n:'))
                     if choice == 1:
-                        loop_2 == False
+                        loop_2 = False
                     elif choice == 2:
                         print('Thank you for banking with us!')
                         loop_1 = False
