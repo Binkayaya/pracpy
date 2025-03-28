@@ -6,10 +6,9 @@
 # 1 2 3 4
 
 
-user_input = int(input('How many layers should your pyramid have?'))
+user_in = int(input('How many layers should your pyramid have?'))
 
-def new_line(num):
-    print(num)
+num = list(range(1,user_in+1))
 
-for num <= user_input:
-    print(layer(num))
+for i in range(len(num)):
+    print((num[0:i+1]))
