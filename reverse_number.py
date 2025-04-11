@@ -1,21 +1,12 @@
-#reverse number
+# Reverse a number without any conversion to strings
 
-number = 32015
-newlist = []
-while number > 0:
-    if number % 10 == 0:
-        newlist.append(0)
+def reverse_number(n):
+    number = n
+    reversed_number = 0
+    while number > 0:
+        single_digit = number % 10
+        reversed_number = reversed_number * 10 + single_digit
         number = number // 10
-    elif number % 10 != 0:
-        while number % 10 != 0:
-            newlist.append(number % 10)
-            number = number // 10
-    
-listing = []
+    print('The reversed number is: ', reversed_number)
 
-for i in newlist:
-    digit = i*10**(len(newlist)-(newlist.index(i)+1))
-    listing.append(digit)
-
-outputnum = sum(listing)
-print(outputnum)
+reverse_number(100148)
