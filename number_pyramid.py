@@ -6,9 +6,10 @@
 # 1 2 3 4
 
 
-user_in = int(input('How many layers should your pyramid have?'))
+max_layer = int(input('How many layers should your pyramid have?'))
 
-num = list(range(1,user_in+1))
 
-for i in range(len(num)):
-    print((num[0:i+1]))
+for layer in range(1, max_layer + 1):
+    for number in range(1, layer +1):
+        print(number, end=' ')
+    print()
