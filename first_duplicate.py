@@ -1,14 +1,21 @@
 # Given a list of numbers, find the first duplicate number. If there’s no duplicate, print "No duplicates found".
 
-init_list = [5, 7, 8, 2, 9, 6, 7, 9, 5]
-newlist = []
-for i in init_list:
-    for j in range(0, len(init_list)):
-        if i/init_list[j] == 1 and init_list.index(i) != j:
-            newlist.append(i)
-            init_list.remove(i)
-            break
-if len(newlist) > 0:
-    print(newlist)
-else:
-    print('No duplicates found')
+def all_duplicate(lst):
+    seen = set()
+    duplicates = set()
+    for num in lst:
+        if num in seen:
+            duplicates.add(num)
+        seen.add(num)
+    return duplicates if duplicates else "No duplicates found"
+
+def first_duplicate(lst):
+    seen = set()
+    for num in lst:
+        if num in seen:  # Checking membership in a set is O(1)
+            return num, seen
+        seen.add(num)
+    return "No duplicates found"
+
+init_list = [5, 8, 2, 9, 6, 7, 9, 5]
+print(all_duplicate(init_list))
