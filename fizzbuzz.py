@@ -5,32 +5,29 @@
 # If divisible by both, we print fizzbuzz
 # If prime, we print prime.                      |
 
-user_input = 101
-user_range = range(1,user_input)
+user_input = int(input('What should be the maximum number? '))
+numbers_to_check = range(1,user_input)
 
-def prime_func(r):
-    mod_list = []
-    target = range(2, r+1)
-    check = [2,3,4,5,6,7,8,9]
-    for number in target:
-        for divisor in check:
-            if number % divisor == 0 and number != divisor:
-                mod_list.append(number)
-
-    prime = list(set(target) - set(mod_list) )
-    return(prime)
+def prime_func(n):
+    primes = []
+    for num in range(2,n+1):
+        is_prime = True
+        for divisor in range(2, int(num**0.5)+1):
+            if num%divisor == 0:
+                is_prime = False
+                break
+        if is_prime:
+            primes.append(num)
+    return primes
 
 prime_number = prime_func(user_input)
 
-for num in user_range:
-    if num % 3 == 0 and num % 5 == 0:
+for num in numbers_to_check:
+    if num in prime_number:
+        print(f"{num} is Prime")
+    elif num % 3 == 0 and num % 5 == 0:
         print(f"{num} is FizzBuzz")
     elif num % 3 == 0:
         print(f"{num} is Fizz")
     elif num % 5 == 0:
         print(f"{num} is Buzz")
-    elif num in prime_number:
-        print(f"{num} is Prime")
-
-
-
