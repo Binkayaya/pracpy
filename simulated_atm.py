@@ -1,71 +1,95 @@
-balance = 1000
-loop_1 = True
-while loop_1 is True:
-    try:
-        operation = int(input('What would you like to do today? \n Enter 1 for Deposit \n Enter 2 for Withdrawal '
-        '\n Enter 3 to Check your balance \n Enter 4 to Exit \n\n:'))
-        
-        if operation == 1:
-            deposit_amount = int(input('How much would you like to deposit?'))
-            balance = balance + deposit_amount
-            print(f'Your new balance is {balance}')
-            loop_2 = True
-            while loop_2 is True:
-                try:
-                    choice = int(input('Would you like to do anything else? \n Enter 1 for Yes'
-                    '\n Enter 2 for No \n\n:'))
-                    if choice == 1:
-                        loop_2 = False
-                    elif choice == 2:
-                        print('Thank you for banking with us!')
-                        loop_1 = False
-                    break
-                except ValueError:
-                    print("Invalid choice! Please choose either 1 or 2.")
+# first create functions for all the operations
 
 
-        elif operation == 2:
-            withdrawal_amount = int(input('How much would you like to withdraw?'))
-            if withdrawal_amount > balance:
-                print(f'Not enough balance. Current balance is {balance}. Try again!')
+
+def invalid_error():
+    print("Invalid amount entered. Try again.")
+
+def deposit(balance):
+    while True:
+        try:
+            amount = int(input("Enter deposit amount: "))
+            if amount > 0:
+                balance += amount
+                print(f'Deposit successful! Your current balance is {balance}')
+                return balance
+            else:
+                invalid_error()
+                continue
+        except ValueError:
+            invalid_error()
+    
+
+
+def withdraw(balance):
+    while True:
+        try:
+            amount = int(input("Enter withdrawal amount: "))
+            if amount < 0:
+                invalid_error()
+                continue
+            elif amount > balance:
+                print(f'Insufficient funds. Your balace is {balance}. Try again!')
                 continue
             else:
-                balance = balance - withdrawal_amount
-                print(f'Your new balance is {balance}')
-                loop_2 = True
-                while loop_2 is True:
-                    try:
-                        choice = int(input('Would you like to do anything else? \n Enter 1 for Yes'
-                        '\n Enter 2 for No \n\n:'))
-                        if choice == 1:
-                            loop_2 = False
-                        elif choice == 2:
-                            print('Thank you for banking with us!')
-                            loop_1 = False 
-                        break
-                    except ValueError:
-                        print("Invalid choice! Please choose either 1 or 2.")
-            
-        elif operation == 3:
-            print(f'Your current balance is {balance}')
-            loop_2 = True
-            while loop_2 is True:
-                try:
-                    choice = int(input('Would you like to do anything else? \n Enter 1 for Yes'
-                    '\n Enter 2 for No \n\n:'))
-                    if choice == 1:
-                        loop_2 = False
-                    elif choice == 2:
-                        print('Thank you for banking with us!')
-                        loop_1 = False
-                    break 
-                except ValueError:
-                    print("Invalid choice! Please choose either 1 or 2.")
-                    
-        elif operation == 4:
+                balance = balance - amount
+                print(f'Withdrawal successful! Your current balance is {balance}')
+                return balance
+        except ValueError:
+            invalid_error()
+    
+
+
+def check_balance(balance):
+    print(f'Your current balance is {balance}')
+    return balance
+
+
+def choice_func():
+    while True:
+        choice = str(input('Would you like to do anything else? '
+        '(y/n) ')).strip().lower()
+        
+        if choice == 'y':
+            return True
+        elif choice == 'n':
             print('Thank you for banking with us!')
+            return False
+        else:
+            print('Invalid choice. Try again.')
+            
+
+
+def error_msg_yn():
+    print('Invalid selection. Select y or n')
+
+def main():
+    balance = 1000
+    while True:
+        try:
+            operation = int(input('What would you like to do today? \n' 
+            'Enter 1 for Deposit \n' 
+            'Enter 2 for Withdrawal \n' 
+            'Enter 3 to Check your balance \n' 
+            'Enter 4 to Exit \n\n:'))
+        except ValueError:
+            print('Enter a valid number between 1 and 4.')
+            continue
+
+        if operation == 1:
+            balance = deposit(balance)
+        elif operation == 2:
+            balance = withdraw(balance)
+        elif operation == 3:
+            balance = check_balance(balance)
+        elif operation == 4:
+            print("Thank you for banking with us!")
+            break
+        else:
+            print("Invalid option. Please choose 1–4.")
+            continue            
+        
+        if not choice_func():
             break
 
-    except ValueError:
-        print("Invalid choice! Please choose among 1,2,3 and 4")
-    
+main()
