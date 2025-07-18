@@ -1,0 +1,4 @@
+
+
+# Environment Variables to ignore
+.env
